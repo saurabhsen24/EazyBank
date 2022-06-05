@@ -1,0 +1,13 @@
+package com.eazybank.springsecurity.repository;
+
+import com.eazybank.springsecurity.entities.AccountTransactions;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface AccountTransactionsRepository extends CrudRepository<AccountTransactions,Long> {
+
+    List<AccountTransactions> findByCustomerIdOrderByTransactionDtDesc(int customerId);
+}
