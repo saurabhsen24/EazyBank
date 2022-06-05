@@ -44,13 +44,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
                 .addFilterAfter(new JWTTokenGeneratorFilter(),BasicAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/myAccount").hasRole("USER")
-                .antMatchers("/myBalance").hasAnyRole("USER","ADMIN")
-                .antMatchers("/myLoans").hasRole("ROOT")
-                .antMatchers("/myCards").authenticated()
-                .antMatchers("/user").authenticated()
-                .antMatchers("/notices").permitAll()
-                .antMatchers("/contact").permitAll().and().httpBasic();
+                .antMatchers("/notices","/contact").permitAll().and()
+                .authorizeRequests().anyRequest().authenticated()
+                .and().httpBasic();
     }
 
     @Bean
